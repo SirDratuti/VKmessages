@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialogues_navigation"
+    app:startDestination="@id/dialoguesFragment">
+
+    <fragment
+        android:id="@+id/dialoguesFragment"
+        android:name="com.example.vkmessages.fragments.DialoguesFragment"
+        tools:layout="@layout/dialogues_fragment"
+        android:label="DialoguesFragment" />
+
+
+</navigation>

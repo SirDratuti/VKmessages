@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dialogues_navigation"
+        android:title="@string/dialogues"
+        android:icon="@drawable/ic_baseline_message_24"/>
+    <item
+        android:id="@+id/friends_navigation"
+        android:title="@string/friends"
+        android:icon="@drawable/ic_baseline_people_24"/>
+</menu>
