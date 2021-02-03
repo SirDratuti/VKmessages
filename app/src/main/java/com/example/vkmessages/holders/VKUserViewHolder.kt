@@ -13,6 +13,7 @@ class VKUserViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
         Picasso.get().load(user.photo).into(root.avatar)
         with(root) {
             name.text = "${user.firstName} ${user.lastName}"
+            user_city.text = user.city
         }
     }
 }

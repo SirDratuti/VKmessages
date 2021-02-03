@@ -32,7 +32,7 @@ class VKConversation(
             return arrayOfNulls(size)
         }
 
-        fun parse(json: JSONObject) : Int = json.optInt("id", 0)
+        fun parse(json: JSONObject): Int = json.getJSONObject("peer").optInt("id", 0)
     }
 
 }

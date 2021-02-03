@@ -12,8 +12,17 @@ class VKConversationViewHolder(private val root: View) : RecyclerView.ViewHolder
     @SuppressLint("SetTextI18n")
     fun bind(user: VKConversation) {
         with(root) {
-            text.text = user.last?.lastText ?: ""
+            val mess: String = user.last?.lastText ?: ""
+            text.text = mess.subSequence(0, min(mess.length, 80))
             from_id.text = user.id.toString()
+        }
+    }
+
+    private fun min(a: Int, b: Int): Int {
+        return if (a >= b) {
+            b
+        } else {
+            a
         }
     }
 }

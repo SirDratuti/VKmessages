@@ -11,7 +11,7 @@ class SampleApplication : Application() {
         VK.addTokenExpiredHandler(tokenTracker)
     }
 
-    private val tokenTracker = object: VKTokenExpiredHandler {
+    private val tokenTracker = object : VKTokenExpiredHandler {
         override fun onTokenExpired() {
             // token expired
         }

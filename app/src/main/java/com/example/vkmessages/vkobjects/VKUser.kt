@@ -9,7 +9,8 @@ data class VKUser(
     val firstName: String = "",
     val lastName: String = "",
     val photo: String = "",
-    val deactivated: Boolean = false
+    val deactivated: Boolean = false,
+    val city: String = ""
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -17,7 +18,8 @@ data class VKUser(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readByte() != 0.toByte()
+        parcel.readByte() != 0.toByte(),
+        parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -26,6 +28,7 @@ data class VKUser(
         parcel.writeString(lastName)
         parcel.writeString(photo)
         parcel.writeByte(if (deactivated) 1 else 0)
+        parcel.writeString(city)
     }
 
     override fun describeContents(): Int {
@@ -46,7 +49,8 @@ data class VKUser(
             firstName = json.optString("first_name", ""),
             lastName = json.optString("last_name", ""),
             photo = json.optString("photo_200", ""),
-            deactivated = json.optBoolean("deactivated", false)
+            deactivated = json.optBoolean("deactivated", false),
+            city = json.getJSONObject("city").optString("title", "")
         )
     }
 }

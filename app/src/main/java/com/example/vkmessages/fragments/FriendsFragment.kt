@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.friends_fragment.*
 
 class FriendsFragment : Fragment() {
 
-    var friendsList : List<VKUser> = listOf()
+    var friendsList: List<VKUser> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +26,7 @@ class FriendsFragment : Fragment() {
 
         VK.execute(VKFriendsRequest(), object : VKApiCallback<List<VKUser>> {
             override fun success(result: List<VKUser>) {
-                friendsList = result.sortedWith(compareBy({it.firstName}, {it.lastName}))
+                friendsList = result.sortedWith(compareBy({ it.firstName }, { it.lastName }))
                 val viewManager = LinearLayoutManager(context)
                 friendsView.apply {
                     layoutManager = viewManager
@@ -35,7 +35,7 @@ class FriendsFragment : Fragment() {
             }
 
             override fun fail(error: Exception) {
-                println("SOMETHING WENT WRONG")
+                println(error)
             }
         })
 

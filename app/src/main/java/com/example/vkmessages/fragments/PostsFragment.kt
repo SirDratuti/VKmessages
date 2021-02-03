@@ -4,19 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vkmessages.R
 import com.example.vkmessages.adapters.VKPostsAdapter
-import com.example.vkmessages.adapters.VKUserAdapter
-import com.example.vkmessages.requests.VKFriendsRequest
 import com.example.vkmessages.requests.VKWallRequest
 import com.example.vkmessages.vkobjects.VKPost
-import com.example.vkmessages.vkobjects.VKUser
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.VKApiCallback
-import kotlinx.android.synthetic.main.friends_fragment.*
+import kotlinx.android.synthetic.main.posts_fragment.*
 
 class PostsFragment : Fragment() {
 
@@ -28,23 +24,32 @@ class PostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        VK.execute(VKWallRequest(4), object : VKApiCallback<List<VKPost>> {
+        getPosts(20)
+        return inflater.inflate(R.layout.posts_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getPosts(20)
+    }
+
+    private fun getPosts(count: Int = 1) {
+        VK.execute(VKWallRequest(count), object : VKApiCallback<List<VKPost>> {
             override fun success(result: List<VKPost>) {
                 postsList = result
                 println(postsList.size)
                 val viewManager = LinearLayoutManager(context)
-                friendsView.apply {
+                postsView.apply {
                     layoutManager = viewManager
                     adapter = VKPostsAdapter(postsList)
                 }
             }
 
             override fun fail(error: Exception) {
+                println(error)
             }
 
         })
-
-        return inflater.inflate(R.layout.friends_fragment, container, false)
     }
 
 }

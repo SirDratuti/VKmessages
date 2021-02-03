@@ -7,7 +7,7 @@ import org.json.JSONObject
 class VKMessage(
     val from: Int = 0,
     val lastText: String? = ""
-) : Parcelable{
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()
@@ -34,7 +34,7 @@ class VKMessage(
 
         fun parse(json: JSONObject) = VKMessage(
             from = json.optInt("from_id", 0),
-            lastText = json.optString("text","")
+            lastText = json.optString("text", "")
         )
     }
 }

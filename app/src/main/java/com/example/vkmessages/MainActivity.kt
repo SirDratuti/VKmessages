@@ -2,6 +2,7 @@ package com.example.vkmessages
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
@@ -23,10 +24,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
         setupBottomNavigation()
 
-        VK.login(this, arrayListOf(VKScope.FRIENDS,VKScope.WALL))
+        VK.login(this, arrayListOf(VKScope.FRIENDS, VKScope.WALL, VKScope.MESSAGES))
 
     }
 

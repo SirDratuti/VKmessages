@@ -19,7 +19,7 @@ class VKConversationsRequest(count: Int = 0) :
             val currentItem = conversations.getJSONObject(i)
             result.add(
                 VKConversation(
-                    (VKConversation.parse(currentItem.getJSONObject("conversations"))),
+                    (VKConversation.parse(currentItem.getJSONObject("conversation"))),
                     (VKMessage.parse(currentItem.getJSONObject("last_message")))
                 )
             )

@@ -15,11 +15,12 @@ import com.example.vkmessages.vkobjects.VKConversation
 import com.example.vkmessages.vkobjects.VKUser
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.VKApiCallback
+import kotlinx.android.synthetic.main.dialogues_fragment.*
 import kotlinx.android.synthetic.main.friends_fragment.*
 
-class DialoguesFragment : Fragment(){
+class DialoguesFragment : Fragment() {
 
-    var conversationList : List<VKConversation> = listOf()
+    var conversationList: List<VKConversation> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,14 +28,11 @@ class DialoguesFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View {
 
-        /*VK.execute(VKConversationsRequest(20), object : VKApiCallback<List<VKConversation>> {
+        VK.execute(VKConversationsRequest(20), object : VKApiCallback<List<VKConversation>> {
             override fun success(result: List<VKConversation>) {
                 conversationList = result
-                println("~~~~~~~~~~~~~~~~~~~~~~~~~")
-                println(conversationList.size)
-                println("~~~~~~~~~~~~~~~~~~~~~~~~~")
                 val viewManager = LinearLayoutManager(context)
-                friendsView.apply {
+                conversationView.apply {
                     layoutManager = viewManager
                     adapter = VKConversationAdapter(conversationList)
                 }
@@ -46,7 +44,7 @@ class DialoguesFragment : Fragment(){
                 println("~~~~~~~~~~~~~~~~~~~~~~~~~")
             }
 
-        })*/
+        })
 
         return inflater.inflate(R.layout.dialogues_fragment, container, false)
     }
