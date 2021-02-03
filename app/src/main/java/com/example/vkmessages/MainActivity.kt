@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupBottomNavigation()
 
-        VK.login(this, arrayListOf(VKScope.FRIENDS))
+        VK.login(this, arrayListOf(VKScope.FRIENDS,VKScope.WALL))
 
     }
 
@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navGraphIds = listOf(
+            R.navigation.posts_navigation,
             R.navigation.dialogues_navigation,
             R.navigation.friends_navigation,
         )
