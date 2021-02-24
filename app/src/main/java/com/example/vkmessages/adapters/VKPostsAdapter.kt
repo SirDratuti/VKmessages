@@ -8,7 +8,7 @@ import com.example.vkmessages.holders.VKPostsViewHolder
 import com.example.vkmessages.vkobjects.VKPost
 
 class VKPostsAdapter(
-    private val users: List<VKPost>,
+    private val users: List<VKPost>
 ) : RecyclerView.Adapter<VKPostsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : VKPostsViewHolder {

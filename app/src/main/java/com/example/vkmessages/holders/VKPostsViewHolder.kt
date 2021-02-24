@@ -11,11 +11,11 @@ import kotlinx.android.synthetic.main.post_item.view.*
 class VKPostsViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
     @SuppressLint("SetTextI18n")
     fun bind(user: VKPost) {
-        Picasso.get().load(user.avatarUrl).into(root.avatar)
-        Picasso.get().load(user.pictureUrl).into(root.post_picture)
+        Picasso.get().load(user.group?.groupAvatarUrl).into(root.avatar)
+        Picasso.get().load(user.pictures?.get(0)).into(root.post_picture)
         with(root) {
             post_text.text = user.text
-            public_name.text = user.publicName
+            public_name.text = user.group?.groupName ?: ""
         }
     }
 }
