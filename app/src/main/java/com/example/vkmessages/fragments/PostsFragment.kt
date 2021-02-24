@@ -21,13 +21,21 @@ class PostsFragment : Fragment() {
 
     private var postsList: ArrayList<VKPost> = arrayListOf()
 
+    var previousTotal = 0
+    var loading = true
+    val visibleThreshold = 10
+    var firstVisibleItem = 0
+    var visibleItemCount = 0
+    var totalItemCount = 0
+    var start = false
+
+
     companion object {
         var lastPostTime: String = "empty"
     }
 
     lateinit var viewManager: LinearLayoutManager
     private lateinit var postAdapter: VKPostsAdapter
-    var loading = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,11 +45,6 @@ class PostsFragment : Fragment() {
         val view = inflater.inflate(R.layout.posts_fragment, container, false)
         initialize(view)
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialize(view)
     }
 
     private fun initialize(view: View) {
@@ -55,31 +58,44 @@ class PostsFragment : Fragment() {
         view.postsView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) {
-                    val visibleItemCount = viewManager.childCount
-                    val totalItemCount = viewManager.itemCount
-                    val pastVisibleItems = viewManager.findFirstVisibleItemPosition()
-                    if (visibleItemCount + pastVisibleItems >= totalItemCount) {
-                        loading = false
-                        println("/n/n/n/n/n/n")
-                        println(lastPostTime)
+                    visibleItemCount = recyclerView.childCount
+                    totalItemCount = viewManager.itemCount
+                    firstVisibleItem = viewManager.findFirstVisibleItemPosition()
+
+                    if (loading) {
+                        if (totalItemCount > previousTotal) {
+                            loading = false
+                            previousTotal = totalItemCount
+                        }
+                    }
+
+                    if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold) && start) {
+                        val initialSize = postsList.size
                         getPosts(10, lastPostTime)
+                        val updatedSize = postsList.size
+                        recyclerView.post {
+                            postAdapter.notifyItemRangeInserted(
+                                initialSize,
+                                updatedSize
+                            )
+                        }
+                        loading = true
                     }
                 }
             }
         })
 
-        getPosts(20, lastPostTime)
+        getPosts(10, lastPostTime)
     }
 
     fun addPosts(list: List<VKPost>) {
         for (i in list) {
             postsList.add(i)
         }
-        postAdapter.notifyDataSetChanged()
     }
 
     private fun getPosts(count: Int = 1, next_from: String = "empty") {
-        Toast.makeText(context, next_from, Toast.LENGTH_SHORT).show()
+        start = true
         VK.execute(VKWallRequest(count, next_from), object : VKApiCallback<List<VKPost>> {
             override fun success(result: List<VKPost>) {
                 addPosts(result)

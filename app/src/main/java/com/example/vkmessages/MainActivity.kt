@@ -36,11 +36,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val callback = object : VKAuthCallback {
             override fun onLogin(token: VKAccessToken) {
-
             }
 
             override fun onLoginFailed(errorCode: Int) {
-                println("ITS ERRRRRROOOOOOORRRRRR\n\n\nHELLO")
             }
         }
         if (data == null || !VK.onActivityResult(requestCode, resultCode, data, callback)) {

@@ -6,10 +6,11 @@ import com.example.vkmessages.vkobjects.VKUser
 import com.vk.api.sdk.requests.VKRequest
 import org.json.JSONObject
 
-class VKConversationsRequest(count: Int = 0) :
+class VKConversationsRequest(count: Int = 4) :
     VKRequest<List<VKConversation>>("messages.getConversations") {
     init {
         addParam("count", count)
+        addParam("extended",1)
     }
 
     override fun parse(r: JSONObject): List<VKConversation> {
