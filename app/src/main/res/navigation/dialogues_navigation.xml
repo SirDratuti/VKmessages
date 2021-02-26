@@ -9,7 +9,18 @@
         android:id="@+id/dialoguesFragment"
         android:name="com.example.vkmessages.fragments.DialoguesFragment"
         tools:layout="@layout/dialogues_fragment"
-        android:label="DialoguesFragment" />
+        android:label="DialoguesFragment" >
+        <action
+            android:id="@+id/action_dialoguesFragment_to_dialogFragment"
+            app:destination="@id/dialogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dialogFragment"
+        android:name="com.example.vkmessages.fragments.ConversationFragment"
+        tools:layout="@layout/dialog_fragment"
+        android:label="ConversationFragment"
+        />
 
 
 </navigation>

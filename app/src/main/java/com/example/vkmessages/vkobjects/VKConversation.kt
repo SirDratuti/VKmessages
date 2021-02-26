@@ -6,7 +6,8 @@ import org.json.JSONObject
 
 class VKConversation(
     val id: Int = 0,
-    val last: VKMessage?
+    val last: VKMessage?,
+    var from : VKUser? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

@@ -6,7 +6,7 @@ import org.json.JSONObject
 
 class VKMessage(
     val from: Int = 0,
-    val lastText: String? = ""
+    val lastText: String? = "",
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

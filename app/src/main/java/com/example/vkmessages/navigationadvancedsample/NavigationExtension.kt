@@ -20,10 +20,13 @@ import android.content.Intent
 import android.util.SparseArray
 import androidx.core.util.forEach
 import androidx.core.util.set
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.example.vkmessages.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -250,6 +253,15 @@ private fun FragmentManager.isOnBackStack(backStackName: String): Boolean {
         }
     }
     return false
+}
+
+fun Fragment.navigate(
+    navDirection: NavDirections,
+    navOptions: NavOptions? = null
+) {
+    NavHostFragment
+        .findNavController(this)
+        .navigate(navDirection, navOptions)
 }
 
 private fun getFragmentTag(index: Int) = "bottomNavigation#$index"

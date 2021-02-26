@@ -5,5 +5,10 @@
     <string name="friends">Friends</string>
     <string name="posts">Posts</string>
     <string name="picture">picture</string>
+    <string name="messages">Сообщения</string>
+    <string name="news">Новости</string>
+    <string name="friend_list">Друзья</string>
+    <string name="logout">out</string>
+    <string name="login">login</string>
     <integer name="com_vk_sdk_AppId">7748325</integer>
 </resources>

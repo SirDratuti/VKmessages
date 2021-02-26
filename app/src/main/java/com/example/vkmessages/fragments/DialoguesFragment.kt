@@ -8,15 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vkmessages.R
 import com.example.vkmessages.adapters.VKConversationAdapter
-import com.example.vkmessages.adapters.VKUserAdapter
+import com.example.vkmessages.navigationadvancedsample.navigate
 import com.example.vkmessages.requests.VKConversationsRequest
-import com.example.vkmessages.requests.VKFriendsRequest
 import com.example.vkmessages.vkobjects.VKConversation
-import com.example.vkmessages.vkobjects.VKUser
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.VKApiCallback
 import kotlinx.android.synthetic.main.dialogues_fragment.*
-import kotlinx.android.synthetic.main.friends_fragment.*
 
 class DialoguesFragment : Fragment() {
 
@@ -34,14 +31,13 @@ class DialoguesFragment : Fragment() {
                 val viewManager = LinearLayoutManager(context)
                 conversationView.apply {
                     layoutManager = viewManager
-                    adapter = VKConversationAdapter(conversationList)
+                    adapter = VKConversationAdapter(conversationList) {
+                        navigate(DialoguesFragmentDirections.actionDialoguesFragmentToDialogFragment())
+                    }
                 }
             }
 
             override fun fail(error: Exception) {
-                println("~~~~~~~~~~~~~~~~~~~~~~~~~")
-                println(error)
-                println("~~~~~~~~~~~~~~~~~~~~~~~~~")
             }
 
         })

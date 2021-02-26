@@ -8,15 +8,23 @@ import com.example.vkmessages.holders.VKConversationViewHolder
 import com.example.vkmessages.vkobjects.VKConversation
 
 class VKConversationAdapter(
-    private val users: List<VKConversation>
+    private val users: List<VKConversation>,
+    private val onClick: (VKConversation) -> Unit
 ) : RecyclerView.Adapter<VKConversationViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             : VKConversationViewHolder {
-        return VKConversationViewHolder(
+        val holder = VKConversationViewHolder(
             LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.conversation_item, parent, false)
         )
+
+        holder.root.setOnClickListener {
+            onClick(users[holder.adapterPosition])
+        }
+
+        return holder
     }
 
     override fun onBindViewHolder(holder: VKConversationViewHolder, position: Int) =

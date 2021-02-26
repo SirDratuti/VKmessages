@@ -1,5 +1,6 @@
 package com.example.vkmessages
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Window
@@ -28,21 +29,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupBottomNavigation()
 
-        VK.login(this, arrayListOf(VKScope.FRIENDS, VKScope.WALL, VKScope.MESSAGES))
-
+        logoutBtn.setOnClickListener {
+            VK.logout()
+            WelcomeActivity.startFrom(this)
+            finish()
+        }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val callback = object : VKAuthCallback {
-            override fun onLogin(token: VKAccessToken) {
-            }
-
-            override fun onLoginFailed(errorCode: Int) {
-            }
-        }
-        if (data == null || !VK.onActivityResult(requestCode, resultCode, data, callback)) {
-            super.onActivityResult(requestCode, resultCode, data)
+    companion object {
+        fun startFrom(context: Context) {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
         }
     }
 

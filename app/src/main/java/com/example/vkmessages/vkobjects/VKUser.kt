@@ -10,7 +10,8 @@ data class VKUser(
     val lastName: String = "",
     val photo: String = "",
     val deactivated: Boolean = false,
-    val city: String = ""
+    val city: String = "",
+    val type : String = "user"
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(

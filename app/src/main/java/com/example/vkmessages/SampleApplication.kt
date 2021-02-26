@@ -13,7 +13,7 @@ class SampleApplication : Application() {
 
     private val tokenTracker = object : VKTokenExpiredHandler {
         override fun onTokenExpired() {
-            // token expired
+            WelcomeActivity.startFrom(this@SampleApplication)
         }
     }
 
